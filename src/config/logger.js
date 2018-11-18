@@ -1,9 +1,11 @@
 import { Bristol } from 'bristol';
 import palin from 'palin';
 import { env } from './env';
+const newLogger = new Bristol();
 
-export const logger = new Bristol();
 
 if (env.LOG_LEVEL !== 'off') {
-  logger.addTarget('console').withFormatter(palin);
+  newLogger.addTarget('console').withFormatter(palin);
 }
+
+export const logger = newLogger;

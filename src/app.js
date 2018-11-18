@@ -9,6 +9,10 @@ import { env } from './config/env';
 import { notFoundHandler } from './middleware/not-found';
 import { errorHandler } from './middleware/error-handler';
 import { combinedRoutes } from './routes/combineRoutes';
+import { syncDB } from './models/index'
+
+syncDB(env.DB_SYNC)
+  .then();
 
 const app = new Koa();
 
