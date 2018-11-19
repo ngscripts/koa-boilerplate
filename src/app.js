@@ -4,6 +4,7 @@ import cors from '@koa/cors';
 import respond from 'koa-respond';
 import bodyParser from 'koa-bodyparser';
 import compress from 'koa-compress';
+import jwt from 'koa-jwt';
 import { logger } from './config/logger';
 import { env } from './config/env';
 import { notFoundHandler } from './middleware/not-found';
@@ -22,6 +23,7 @@ app
   .use(respond())
   .use(cors())
   .use(bodyParser())
+  .use(jwt({ secret: env.JWT_SECRET, key: 'loggedUser' }).unless({ path: [/^\/public/] }))
   .use(combinedRoutes())
   .use(notFoundHandler);
 
